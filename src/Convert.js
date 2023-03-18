@@ -122,6 +122,28 @@ export class Convert extends Component {
     const testCasesDefailtVal =
       "* #push\n  * When push a string\n    * Return pushed string\n  * When push nil\n    * Raise ArgumentError";
 
+    const textFieldStyle = {
+      '& .MuiInputBase-input': {
+        color: '#333333',    // 入力文字の色
+      },
+      '& label': {
+        color: '333333', // 通常時のラベル色 
+      },
+      '& .MuiInput-underline:before': {
+        borderBottomColor: '#cccccc', // 通常時のボーダー色
+      },
+      '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+        borderBottomColor: '#87CAAC',  // ホバー時のボーダー色
+      },
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: '#87CAAC',    // 通常時のボーダー色(アウトライン)
+        },
+        '&:hover fieldset': {
+          borderColor: '#87CAAC',    // ホバー時のボーダー色(アウトライン)
+        },
+      },
+    }
     return (
       <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="lg">
@@ -153,6 +175,7 @@ export class Convert extends Component {
                 defaultValue={testCasesDefailtVal}
                 InputLabelProps={{ shrink: true }}
                 multiline
+                sx={textFieldStyle}
                 inputProps={{
                   cols: 150,
                 }}
@@ -172,6 +195,7 @@ export class Convert extends Component {
                 label="Test cases(Rspec)"
                 defaultValue={this.state.converted}
                 multiline
+                sx={textFieldStyle}
                 InputLabelProps={{ shrink: true }}
                 inputProps={{
                   cols: 150,
