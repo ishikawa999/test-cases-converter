@@ -1,5 +1,6 @@
-textarea {
+.MuiInputBase-root {
   color: #333333;
+  background: white;
 }
 
 a {
@@ -32,8 +33,13 @@ div#footer {
   bottom: 0;
   width: 100%;
   background-color: #f4f4f4;;
+  z-index: 1000;
 }
 
 main > .MuiBox-root {
   margin-top: 5px;
+}
+
+.MuiContainer-root {
+  padding-bottom: 50px;
 }

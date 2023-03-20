@@ -9,8 +9,8 @@ def convert(input)
   output = ''
   lines.each_with_index do |line, index|
     parent = search_parent(prev_line, data, line)
-    m = line.match(/^( *)\* (.*)/)
-    data[index] = { index: index, content: m[2], parent: parent, original: line, nest: m[1].length, children: [] }
+    m = line.match(/^( *)(\*|\-) (.*)/)
+    data[index] = { index: index, content: m[3], parent: parent, original: line, nest: m[1].length, children: [] }
     prev_line = data[index]
     data[parent][:children] = data[parent][:children] + [index] unless parent.nil?
   end
@@ -41,7 +41,7 @@ def children_blocks(line, data, output)
 end
 
 def search_parent(prev_line, data, line)
-  m = line.match(/^( *)\* (.*)/)
+  m = line.match(/^( *)(\*|\-) (.*)/)
   return nil if m[1].length.zero?
 
   if prev_line[:nest] == m[1].length

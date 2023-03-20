@@ -50,10 +50,10 @@ export class Convert extends Component {
 
     lines.forEach((line, index) => {
       let parent = this.searchParent(prevLine, data, line);
-      let m = line.match(/^( *)\* (.*)/);
+      let m = line.match(/^( *)(\*|-) (.*)/);
       data[index] = {
         index: index,
-        content: m[2],
+        content: m[3],
         parent: parent,
         original: line,
         nest: m[1].length,
@@ -93,7 +93,7 @@ export class Convert extends Component {
   };
 
   searchParent = (prevLine, data, line) => {
-    let m = line.match(/^( *)\* (.*)/);
+    let m = line.match(/^( *)(\*|-) (.*)/);
 
     if (m[1].length === 0) {
       return null;
@@ -120,7 +120,7 @@ export class Convert extends Component {
       }
     });
     const testCasesDefailtVal =
-      "* #push\n  * When push a string\n    * Return pushed string\n  * When push nil\n    * Raise ArgumentError";
+      "* #push\n  * When push a string\n    * Return pushed string\n  * When push nil\n    * Raise ArgumentError\n* #hello\n  * Return hello";
 
     const textFieldStyle = {
       '& .MuiInputBase-input': {
@@ -160,7 +160,7 @@ export class Convert extends Component {
               <CodeIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Convert Bulleted test cases to Rspec
+              Convert Markdown bulleted test cases to Rspec
             </Typography>
             <Box
               component="form"
@@ -171,7 +171,7 @@ export class Convert extends Component {
               <TextField
                 id="test-cases"
                 name="test-cases"
-                label="Test cases(Bullet point)"
+                label="Test cases(Markdown bullet points)"
                 defaultValue={testCasesDefailtVal}
                 InputLabelProps={{ shrink: true }}
                 multiline
@@ -199,16 +199,12 @@ export class Convert extends Component {
                 InputLabelProps={{ shrink: true }}
                 inputProps={{
                   cols: 150,
+                  readOnly: true
                 }}
                 maxRows={1000}
               />
             </Box>
-
             <Box id="footer">
-              <Typography variant="body2" color="textSecondary" align="center">
-                {"Created by "}
-                <a href="https://github.com/ishikawa999">@ishikawa999</a>{" "}
-              </Typography>
               <Typography variant="body2" color="textSecondary" align="center">
                 {"SorceCode "}
                 <a href="https://github.com/ishikawa999/test-cases-converter">ishikawa999/test-cases-converter</a>{" "}
