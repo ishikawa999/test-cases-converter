@@ -68,7 +68,7 @@ export class Convert extends Component {
     prevLine = null;
     Object.values(data).forEach((line) => {
       if (line.parent === null) {
-        output += `describe "${line.content}"\n`;
+        output += `describe "${line.content}" do\n`;
         output = this.childrenBlocks(line, data, output);
         output += "end\n";
       }
